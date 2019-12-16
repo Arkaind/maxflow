@@ -45,4 +45,14 @@ let () =
   (* Write and Export file*)
   let () = write_file _outfile ford_fulkerson_solution in
   let() = export (_outfile^".dot") ford_fulkerson_solution in
+
+  (* Convert the dot file and display the graph*)
+  let write_toshow() = 
+    let ff = open_out "./show_me" in
+    fprintf ff "dot -Tsvg %s.dot > %s.svg\n" _outfile _outfile;
+    fprintf ff "eog -n %s.svg &\n" _infile;
+    fprintf ff "eog -n %s.svg \n" _outfile;
+   
+    close_out ff; in
+  write_toshow();
   ()
